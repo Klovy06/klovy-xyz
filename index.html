@@ -60,7 +60,7 @@
                 </div>
 
                 <p class="hero-desc" data-i18n="hero_desc">
-                    Tworzę nowoczesne aplikacje webowe przy użyciu React, TypeScript i Vite. Pasjonuję się czystym kodem, wydajnością i projektami, które naprawdę mają znaczenie.
+                    Tworzę nowoczesne aplikacje webowe w React, TypeScript i Vite, skupiając się na czystym kodzie, wydajności i projektach rozwiązujących realne problemy. Rozwijam się w ekosystemie JavaScript, pracuję również z Node.js, interesując się całym procesem tworzenia produktu – od pomysłu i architektury po rozwój i optymalizację. Lubię budować projekty od podstaw, eksperymentować z nowymi rozwiązaniami i tworzyć stabilne, nowoczesne aplikacje o przemyślanej strukturze.
                 </p>
 
                 <div class="tech-tags">
@@ -81,7 +81,6 @@
                     <h3 class="section-title" data-i18n="projects_title">Projekty</h3>
                 </div>
                 <div class="projects-list">
-
                     <button class="project-item" type="button" onclick="openProjectModal('klovy')">
                         <div class="project-item-left">
                             <div class="project-icon-wrap">
@@ -96,7 +95,7 @@
                             </div>
                         </div>
                         <div class="project-item-right">
-                            <span class="project-status done" data-i18n="badge_done">Zamkniety</span>
+                            <span class="project-status done" data-i18n="badge_done">Zamknięty</span>
                             <i class="ph-bold ph-caret-right project-arrow"></i>
                         </div>
                     </button>
@@ -121,7 +120,6 @@
                             <i class="ph-bold ph-caret-right project-arrow"></i>
                         </div>
                     </button>
-
                 </div>
             </div>
         </div>
@@ -142,7 +140,24 @@
             </div>
         </div>
 
-        <div class="card box-social" style="--delay:0.27s">
+        <div class="card box-posts" style="--delay:0.27s" onclick="openPostsModal()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openPostsModal()">
+            <div class="card-content">
+                <p class="section-eyebrow mono" data-i18n="posts_eyebrow">// blog</p>
+                <h3 class="section-title" data-i18n="posts_title">Posty</h3>
+                <div id="latestPostPreview" class="latest-post-preview">
+                    <div class="latest-post-loading">
+                        <i class="ph-fill ph-spinner"></i>
+                        <span data-i18n="posts_loading">Ładowanie...</span>
+                    </div>
+                </div>
+                <div class="posts-footer">
+                    <span class="posts-count-label mono" id="postsCountLabel" data-i18n="posts_see_all">Zobacz wszystkie</span>
+                    <i class="ph-bold ph-arrow-right posts-arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="card box-social" style="--delay:0.32s">
             <div class="card-content">
                 <p class="section-eyebrow mono" data-i18n="social_eyebrow">// znajdź mnie</p>
                 <div class="social-grid">
@@ -162,7 +177,7 @@
             </div>
         </div>
 
-        <div class="card box-contact" style="--delay:0.32s">
+        <div class="card box-contact" style="--delay:0.37s">
             <div class="card-content">
                 <p class="section-eyebrow mono" data-i18n="contact_eyebrow">// kontakt</p>
                 <h3 class="section-title" data-i18n="modal_title">Porozmawiajmy</h3>
@@ -267,6 +282,57 @@
                         <span data-i18n="dev_contact">Skontaktuj się</span>
                         <i class="ph-bold ph-arrow-up-right"></i>
                     </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="postsListModal" onclick="closePostsModal(event)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-box modal-box-wide">
+            <div class="modal-header">
+                <div class="modal-icon-wrap posts-icon">
+                    <i class="ph-fill ph-newspaper"></i>
+                </div>
+                <div class="modal-title-area">
+                    <p class="modal-number mono">// blog</p>
+                    <h2 class="modal-name" data-i18n="posts_title">Posty</h2>
+                </div>
+                <button class="modal-close" type="button" onclick="closePostsModal()" aria-label="Zamknij">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="posts-list-container" id="postsListContainer">
+                    <div class="posts-list-loading">
+                        <i class="ph-fill ph-spinner"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="postReadModal" onclick="closePostReadModal(event)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-box modal-box-post">
+            <div class="modal-header">
+                <div class="modal-icon-wrap posts-icon">
+                    <i class="ph-fill ph-article"></i>
+                </div>
+                <div class="modal-title-area">
+                    <p class="modal-number mono" id="postReadDate"></p>
+                    <h2 class="modal-name" id="postReadTitle"></h2>
+                </div>
+                <button class="modal-close" type="button" onclick="closePostReadModal()" aria-label="Zamknij">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="post-tags-row" id="postReadTags"></div>
+                <div class="post-content-body" id="postReadContent"></div>
+                <div class="modal-status-row">
+                    <button class="modal-back-btn" type="button" onclick="backToPostsList()">
+                        <i class="ph-bold ph-arrow-left"></i>
+                        <span data-i18n="posts_back">Wróć do listy</span>
+                    </button>
                 </div>
             </div>
         </div>
