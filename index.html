@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jakub Maksymowicz — Portfolio</title>
+    <meta name="keywords" content="Jakub Maksymowicz, Klovy, developer, React, TypeScript, Vite, frontend, portfolio">
+    <meta name="author" content="Jakub Maksymowicz">
+
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+    <div class="aurora-bg"></div>
+    <div class="noise"></div>
+    <canvas id="particlesCanvas" aria-hidden="true"></canvas>
+    <div class="scanlines" aria-hidden="true"></div>
+
+    <div class="bento-grid" id="container">
+
+        <div class="card box-hero" style="--delay:0.05s" onclick="openDeveloperModal()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openDeveloperModal()">
+            <div class="card-content">
+                <div class="logo-area">
+                    <div class="lang-dropdown" id="langDropdown" onclick="event.stopPropagation()">
+                        <button class="lang-toggle" type="button" id="langToggle" aria-haspopup="true" aria-expanded="false">
+                            <img id="langCurrentFlag" src="https://flagcdn.com/pl.svg" alt="PL">
+                            <span id="langCurrentLabel">PL</span>
+                            <i class="ph-bold ph-caret-down"></i>
+                        </button>
+                        <div class="lang-menu" id="langMenu" role="menu" aria-hidden="true">
+                            <button class="lang-option" type="button" role="menuitem" onclick="setLanguage('pl')" data-lang="pl">
+                                <img src="https://flagcdn.com/pl.svg" alt="PL"><span>Polski</span>
+                            </button>
+                            <button class="lang-option" type="button" role="menuitem" onclick="setLanguage('en')" data-lang="en">
+                                <img src="https://flagcdn.com/gb.svg" alt="EN"><span>English</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-body">
+                    <div class="avatar-wrap">
+                        <div class="avatar-ring"></div>
+                        <div class="avatar-inner">
+                            <img src="assets/img/klovy.jpg" alt="Jakub Maksymowicz" class="avatar-photo">
+                        </div>
+                        <div class="avatar-glow"></div>
+                    </div>
+                    <div class="hero-text">
+                        <p class="hero-label mono" data-i18n="hero_label">// developer</p>
+                        <h1 class="gradient-text">Jakub<br>Maksymowicz</h1>
+                        <p class="hero-alias mono">aka <span class="accent-text">Klovy</span></p>
+                    </div>
+                </div>
+
+                <p class="hero-desc" data-i18n="hero_desc">
+                    Tworzę nowoczesne aplikacje webowe przy użyciu React, TypeScript i Vite. Pasjonuję się czystym kodem, wydajnością i projektami, które naprawdę mają znaczenie.
+                </p>
+
+                <div class="tech-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">TypeScript</span>
+                    <span class="tag">Vite</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">Node.js</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card box-projects" style="--delay:0.12s">
+            <div class="card-content">
+                <div class="projects-header">
+                    <p class="section-eyebrow mono" data-i18n="projects_eyebrow">// projekty</p>
+                    <h3 class="section-title" data-i18n="projects_title">Projekty</h3>
+                </div>
+                <div class="projects-list">
+
+                    <button class="project-item" type="button" onclick="openProjectModal('klovy')">
+                        <div class="project-item-left">
+                            <div class="project-icon-wrap">
+                                <i class="ph-fill ph-graduation-cap"></i>
+                            </div>
+                            <div class="project-item-info">
+                                <span class="project-item-name">klovy.pl</span>
+                                <span class="project-item-tags">
+                                    <span class="project-tag">Education</span>
+                                    <span class="project-tag">Web</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="project-item-right">
+                            <span class="project-status done" data-i18n="badge_done">Zamkniety</span>
+                            <i class="ph-bold ph-caret-right project-arrow"></i>
+                        </div>
+                    </button>
+
+                    <div class="projects-divider"></div>
+
+                    <button class="project-item" type="button" onclick="openProjectModal('chat')">
+                        <div class="project-item-left">
+                            <div class="project-icon-wrap chat-icon">
+                                <i class="ph-fill ph-chats-circle"></i>
+                            </div>
+                            <div class="project-item-info">
+                                <span class="project-item-name">Klovy Chat</span>
+                                <span class="project-item-tags">
+                                    <span class="project-tag">Security</span>
+                                    <span class="project-tag">Messaging</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="project-item-right">
+                            <span class="project-status wip" data-i18n="badge_wip">W trakcie</span>
+                            <i class="ph-bold ph-caret-right project-arrow"></i>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card box-ecosystem" style="--delay:0.22s" onclick="openEcosystemModal()" role="button" tabindex="0" onkeydown="if(event.key==='Enter')openEcosystemModal()">
+            <div class="card-content">
+                <p class="section-eyebrow mono" data-i18n="ecosystem_eyebrow">// ecosystem</p>
+                <h3 class="section-title" data-i18n="ecosystem_title">Ekosystem Klovy</h3>
+                <p class="section-desc" data-i18n="ecosystem_desc">Spójna rodzina projektów rozwijanych pod marką Klovy Systems.</p>
+                <a href="https://klovy.systems" target="_blank" class="ecosystem-pill" onclick="event.stopPropagation()">
+                    <i class="ph-fill ph-circles-four"></i>
+                    <span>klovy.systems</span>
+                    <i class="ph-bold ph-arrow-up-right micro"></i>
+                </a>
+                <div class="ecosystem-dots" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card box-social" style="--delay:0.27s">
+            <div class="card-content">
+                <p class="section-eyebrow mono" data-i18n="social_eyebrow">// znajdź mnie</p>
+                <div class="social-grid">
+                    <a href="https://www.linkedin.com/in/jakub-maksymowicz/" target="_blank" class="social-link">
+                        <i class="ph-fill ph-linkedin-logo"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/Klovy06" target="_blank" class="social-link">
+                        <i class="ph-fill ph-github-logo"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://discord.com/users/668879650792931329" target="_blank" rel="noopener" class="social-link social-link-discord">
+                        <i class="ph-fill ph-discord-logo"></i>
+                        <span>Discord</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card box-contact" style="--delay:0.32s">
+            <div class="card-content">
+                <p class="section-eyebrow mono" data-i18n="contact_eyebrow">// kontakt</p>
+                <h3 class="section-title" data-i18n="modal_title">Porozmawiajmy</h3>
+                <p class="section-desc" data-i18n="modal_desc">Masz projekt lub pomysł?<br>Napisz — chętnie porozmawiam.</p>
+                <div class="contact-email" onclick="copyEmail()">
+                    <i class="ph-fill ph-envelope"></i>
+                    <span id="emailBox" data-user="kontakt" data-domain="klovy" data-tld="systems"></span>
+                    <i class="ph-fill ph-copy copy-icon"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-left mono">&copy; <span id="currentYear"></span> Jakub Maksymowicz</div>
+            <div class="footer-right">
+                <a href="https://klovy.systems" target="_blank" class="privacy-link mono">klovy.systems</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="projectModal" onclick="closeProjectModal(event)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-icon-wrap" id="modalIcon">
+                    <i class="ph-fill ph-graduation-cap"></i>
+                </div>
+                <div class="modal-title-area">
+                    <p class="modal-number mono" id="modalNumber">01</p>
+                    <h2 class="modal-name" id="modalName">klovy.pl</h2>
+                </div>
+                <button class="modal-close" type="button" onclick="closeProjectModal()" aria-label="Zamknij">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc" id="modalDesc"></p>
+                <div class="modal-tags" id="modalTags"></div>
+                <div class="modal-date-row">
+                    <i class="ph-fill ph-calendar-blank"></i>
+                    <span id="modalDate" class="modal-date mono"></span>
+                </div>
+                <div class="modal-status-row">
+                    <span class="project-status" id="modalStatus"></span>
+                    <a href="#" class="modal-link-btn" id="modalLink" target="_blank" rel="noopener">
+                        <span id="modalLinkText">Otwórz projekt</span>
+                        <i class="ph-bold ph-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="ecosystemModal" onclick="closeEcosystemModal(event)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-box">
+            <div class="modal-header">
+                <div class="modal-icon-wrap ecosystem-icon">
+                    <i class="ph-fill ph-circles-four"></i>
+                </div>
+                <div class="modal-title-area">
+                    <p class="modal-number mono">// ecosystem</p>
+                    <h2 class="modal-name" data-i18n="ecosystem_title">Ekosystem Klovy</h2>
+                </div>
+                <button class="modal-close" type="button" onclick="closeEcosystemModal()" aria-label="Zamknij">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-desc" data-i18n="ecosystem_modal_desc"></p>
+                <div class="modal-status-row">
+                    <span class="project-tag"><i class="ph-fill ph-circles-four" style="margin-right:4px"></i>Klovy Systems</span>
+                    <a href="https://klovy.systems" target="_blank" class="modal-link-btn" rel="noopener">
+                        <span data-i18n="ecosystem_visit">Odwiedź stronę</span>
+                        <i class="ph-bold ph-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="developerModal" onclick="closeDeveloperModal(event)" aria-hidden="true" role="dialog" aria-modal="true">
+        <div class="modal-box modal-box-wide">
+            <div class="modal-header">
+                <div class="modal-icon-wrap developer-icon">
+                    <i class="ph-fill ph-code"></i>
+                </div>
+                <div class="modal-title-area">
+                    <p class="modal-number mono">// developer</p>
+                    <h2 class="modal-name" data-i18n="developer_title">Kim jestem?</h2>
+                </div>
+                <button class="modal-close" type="button" onclick="closeDeveloperModal()" aria-label="Zamknij">
+                    <i class="ph-bold ph-x"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="dev-sections" id="devSections"></div>
+                <div class="modal-status-row">
+                    <span class="project-status done" data-i18n="dev_available">Dostępny do współpracy</span>
+                    <a href="https://www.linkedin.com/in/jakub-maksymowicz/" target="_blank" class="modal-link-btn" rel="noopener">
+                        <span data-i18n="dev_contact">Skontaktuj się</span>
+                        <i class="ph-bold ph-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
